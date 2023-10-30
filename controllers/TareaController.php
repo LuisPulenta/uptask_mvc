@@ -16,7 +16,11 @@ class TareaController{
        
         if($_SERVER['REQUEST_METHOD']==='POST'){
 
-            echo json_encode ($_POST);
+            $respuesta=['proyectoId' => $_POST['proyectoId']];
+
+            echo json_encode($respuesta);
+
+            // echo json_encode ($_POST);
 
             // session_start();
 
@@ -24,15 +28,15 @@ class TareaController{
 
             // $proyecto = Proyecto::where('url',$proyectoId);
 
-            // // if(!$proyecto){
-            // //     $respuesta=[
-            // //         'tipo' => 'error',
-            // //         'mensaje' => 'Hubo un error al agregar la Tarea'
-            // //     ];
+            // if(!$proyecto){
+            //     $respuesta=[
+            //         'tipo' => 'error',
+            //         'mensaje' => 'Hubo un error al agregar la Tarea'
+            //     ];
                 
-            // //     echo json_encode($respuesta);
-            // //     return;
-            // // }
+            //     echo json_encode($respuesta);
+            //     return;
+            // }
             
             // echo json_encode($proyecto);
         }

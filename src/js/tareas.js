@@ -85,6 +85,7 @@
         //Construir la petición
         const datos = new FormData();
         datos.append('nombre', tarea);
+        datos.append('proyectoId', obtenerProyecto());
 
         try {
 
@@ -94,7 +95,7 @@
                 body: datos 
             });
             
-            console.log(respuesta);
+            //console.log(respuesta);
 
             const resultado = await respuesta.json();
 

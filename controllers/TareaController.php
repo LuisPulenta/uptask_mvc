@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use MVC\Router;
+use Model\Proyecto;
 use Model\Tarea;
 
 class TareaController{
@@ -16,29 +17,29 @@ class TareaController{
        
         if($_SERVER['REQUEST_METHOD']==='POST'){
 
-            $respuesta=['proyectoId' => $_POST['proyectoId']];
+            session_start();
+            $proyectoId = $_POST['proyectoId'];
+            $proyecto = Proyecto::where('url',$proyectoId);
 
-            echo json_encode($respuesta);
+            if(!$proyecto || $proyecto->propietarioId !== $_SESSION['id']){
+                $respuesta=[
+                    'tipo' => 'error',
+                    'mensaje' => 'Hubo un error al agregar la Tarea'
+                ];
+                echo json_encode($respuesta);   
+                return;
+            }
 
-            // echo json_encode ($_POST);
-
-            // session_start();
-
-            // $proyectoId = $_POST['proyectoId'];
-
-            // $proyecto = Proyecto::where('url',$proyectoId);
-
-            // if(!$proyecto){
-            //     $respuesta=[
-            //         'tipo' => 'error',
-            //         'mensaje' => 'Hubo un error al agregar la Tarea'
-            //     ];
-                
-            //     echo json_encode($respuesta);
-            //     return;
-            // }
-            
-            // echo json_encode($proyecto);
+            // Insertar la tarea en la BD
+            $tarea = new Tarea($_POST);
+            $tarea->proyectoId = $proyecto->id;
+            $resultado = $tarea->guardar();
+            $respuesta=[
+                'tipo' => 'exito',
+                'id' => $resultado['id'],
+                'mensaje' => 'Tarea creada correctamente'
+            ];
+            echo json_encode($respuesta);   
         }
     }
 

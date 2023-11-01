@@ -4,6 +4,9 @@
     <div class="contenedor-nueva-tarea">
         <button type="button" class="agregar-tarea" id="agregar-tarea">&#43; Nueva Tarea</button>
     </div>
+    <ul id="listado-tareas" class="listado-tareas">
+
+    </ul>
 </div>
 
 
@@ -11,8 +14,9 @@
 
 <?php
     $script= '
-        <script src="build/js/tareas.js"></script>
-        ';
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="build/js/tareas.js"></script>
+    ';
 ?>
 
 

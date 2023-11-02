@@ -2,6 +2,17 @@
 @use 'base/mixins' as m;
 
 .sidebar{
+
+    display:none;
+
+    @include m.tablet {
+        display:block;        
+    }
+
+    &.mostrar{
+        display: block;
+    }
+
     background-color: v.$indigo;
     padding: 2rem;
     h2 {
